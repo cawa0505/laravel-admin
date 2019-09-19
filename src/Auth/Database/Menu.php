@@ -49,7 +49,7 @@ class Menu extends Model
      *
      * @return BelongsToMany
      */
-    public function roles() : BelongsToMany
+    public function roles(): BelongsToMany
     {
         $pivotTable = config('admin.database.role_menu_table');
 
@@ -61,7 +61,7 @@ class Menu extends Model
     /**
      * @return array
      */
-    public function allNodes() : array
+    public function allNodes(): array
     {
         $connection = config('admin.database.connection') ?: config('database.default');
         $orderColumn = DB::connection($connection)->getQueryGrammar()->wrap($this->orderColumn);
