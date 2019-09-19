@@ -7,4 +7,3 @@ composer.lock
 .idea/
 .php_cs.cache
 .vscode/
-phpcs.xml
