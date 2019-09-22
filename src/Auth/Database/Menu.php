@@ -96,8 +96,10 @@ class Menu extends Model
     {
         static::treeBoot();
 
-        static::deleting(function ($model) {
-            $model->roles()->detach();
-        });
+        static::deleting(
+            function ($model) {
+                $model->roles()->detach();
+            }
+        );
     }
 }
