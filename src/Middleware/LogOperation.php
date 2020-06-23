@@ -29,6 +29,7 @@ class LogOperation
             ];
 
             try {
+                $this->RemoveOldestRecord();
                 OperationLogModel::create($log);
             } catch (\Exception $exception) {
                 // pass
@@ -101,5 +102,15 @@ class LogOperation
         }
 
         return false;
+    }
+
+    protected function RemoveOldestRecord() {
+        $maximun_items = config('admin.operation_log.maximum');
+        if($maximun_items > 0) {
+            $count = OperationLogModel::count();
+            OperationLogModel::latest()->take($count)->skip($maximun_items)->get()->each(function ($row) {
+                $row->delete();
+            });
+        }
     }
 }

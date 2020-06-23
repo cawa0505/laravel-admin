@@ -25,8 +25,8 @@ class Downloadable extends AbstractDisplayer
             } else {
                 $src = Storage::disk(config('admin.upload.disk'))->url($value);
             }
-
-            $name = basename($value);
+            // $name = basename($value);
+            $name = preg_replace('/^.+[\\\\\\/]/', '', $value);
 
             return <<<HTML
 <a href='$src' download='{$name}' target='_blank' class='text-muted'>

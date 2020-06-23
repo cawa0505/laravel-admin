@@ -8,6 +8,7 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Facades\Storage;
+use Yadahan\AuthenticationLog\AuthenticationLogable;
 
 /**
  * Class Administrator.
@@ -16,7 +17,7 @@ use Illuminate\Support\Facades\Storage;
  */
 class Administrator extends Model implements AuthenticatableContract
 {
-    use Authenticatable, AdminBuilder, HasPermissions;
+    use Authenticatable, AdminBuilder, HasPermissions, AuthenticationLogable;
 
     protected $fillable = ['username', 'password', 'name', 'avatar'];
 

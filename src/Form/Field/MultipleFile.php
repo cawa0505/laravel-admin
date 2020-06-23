@@ -218,7 +218,8 @@ class MultipleFile extends Field
 
         foreach ($files as $index => $file) {
             $preview = array_merge([
-                'caption' => basename($file),
+                // 'caption' => basename($file),
+                'caption' => preg_replace('/^.+[\\\\\\/]/', '', $file),
                 'key'     => $index,
             ], $this->guessPreviewType($file));
 
@@ -258,11 +259,11 @@ EOT;
 
             $this->script .= <<<EOT
 $("input{$this->getElementClassSelector()}").on('filebeforedelete', function() {
-    
+
     return new Promise(function(resolve, reject) {
-    
+
         var remove = resolve;
-    
+
         swal({
             title: "{$text['title']}",
             type: "warning",
@@ -290,13 +291,13 @@ EOT;
 
             $this->script .= <<<EOT
 $("input{$this->getElementClassSelector()}").on('filesorted', function(event, params) {
-    
+
     var order = [];
-    
+
     params.stack.forEach(function (item) {
         order.push(item.key);
     });
-    
+
     $("input{$this->getElementClassSelector()}_sort").val(order);
 });
 EOT;

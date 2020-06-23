@@ -52,9 +52,11 @@ class LogController extends AdminController
         });
 
         $grid->disableCreateButton();
-
+        $grid->disableExport(false);
+        $grid->disableFilter(false);
         $grid->filter(function (Grid\Filter $filter) {
-            $userModel = config('admin.database.users_model');
+            $userModel = new config('admin.database.users_model');
+            $filter->disableIdFilter();
 
             $filter->equal('user_id', 'User')->select($userModel::all()->pluck('name', 'id'));
             $filter->equal('method')->select(array_combine(OperationLog::$methods, OperationLog::$methods));
